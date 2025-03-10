@@ -1,4 +1,4 @@
-package org.acme.dto.model;
+package org.acme.model;
 
 import io.quarkus.hibernate.reactive.panache.PanacheEntityBase;
 import jakarta.persistence.*;
@@ -14,7 +14,6 @@ import java.sql.Blob;
 @Entity
 @Table(name = "loot")
 public class Loot extends PanacheEntityBase {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
