@@ -1,9 +1,15 @@
 package org.acme;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import org.acme.dto.CDTOGestionLootable;
 import org.acme.dto.generic.IMessageAPI;
 import org.acme.handler.CGenericGestionLootableHandler;
@@ -70,5 +76,27 @@ public class CGenericGestionLootableRessource {
         }
     }
 
+    @GET
+    @Path("/card/{name}")
+    public Uni<Response> getSplashartCard(@PathParam("name") String name) {
+        return this.genericGestionUserHandler.getSplashartCard(name)
+                .onItem().transform(card -> {
+                    byte[] imageBytes = card;
+                    return Response.ok(imageBytes)
+                            .type("image/jpeg")
+                            .build();
+                });
+    }
 
+    @GET
+    @Path("/banner/{name}")
+    public Uni<Response> getSplashartBanner(@PathParam("name") String name){
+        return this.genericGestionUserHandler.getSplashartBanner(name)
+                .onItem().transform(card -> {
+                    byte[] imageBytes = card;
+                    return Response.ok(imageBytes)
+                            .type("image/jpeg")
+                            .build();
+                });
+    }
 }

@@ -5,6 +5,7 @@ import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.acme.dto.http.GetAllCharacter;
 import org.acme.mapper.ILootMapper;
+import org.acme.model.Loot;
 import org.acme.repository.CCharacterRepository;
 import org.acme.repository.CLootRepository;
 
@@ -33,6 +34,24 @@ public class CLootService {
                     output.isSuccess = false;
                     output.message = e.getMessage();
                     return output;
+                });
+    }
+
+    @WithSession
+    public Uni<byte[]> getSplashartCard(String name){
+        return this.lootRepository.findByName(name)
+                .onItem().transform(Loot::getSplashartCard)
+                .onFailure().recoverWithItem(e ->{
+                    return null;
+                });
+    }
+
+    @WithSession
+    public Uni<byte[]> getSplashartBanner(String name){
+        return this.lootRepository.findByName(name)
+                .onItem().transform(Loot::getSplashartBanner)
+                .onFailure().recoverWithItem(e ->{
+                    return null;
                 });
     }
 }

@@ -22,4 +22,12 @@ public class CGenericGestionLootableHandler implements CDTOGestionLootable.IHand
     public Uni<GetAllCharacter.Output> getAllCharacter(GetAllCharacter.Input input) {
         return this.lootService.getAllCharacter().onItem().transform(out -> out);
     }
+
+    public Uni<byte[]> getSplashartCard(String name){
+        return this.lootService.getSplashartCard(name).onItem().transform(out -> out);
+    }
+
+    public Uni<byte[]> getSplashartBanner(String name){
+        return this.lootService.getSplashartBanner(name).onItem().transform(out -> out);
+    }
 }
