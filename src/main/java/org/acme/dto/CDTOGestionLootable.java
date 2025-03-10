@@ -8,6 +8,7 @@ import org.acme.dto.generic.IGenericDTO;
 
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
+import org.acme.dto.http.GetAllCharacter;
 
 @ApplicationScoped
 public class CDTOGestionLootable implements IGenericDTO {
@@ -15,6 +16,7 @@ public class CDTOGestionLootable implements IGenericDTO {
     private final Map<String, CMessageAPI> messageMap = new HashMap<>();
 
     public CDTOGestionLootable() {
+        messageMap.put(GetAllCharacter.MSG_NAME, new CMessageAPI(GetAllCharacter.MSG_NAME, GetAllCharacter.Input.class));
     }
 
     @Override
@@ -28,6 +30,6 @@ public class CDTOGestionLootable implements IGenericDTO {
     }
 
     public interface IHandlerDTOGestionUser{
-
+        Uni<GetAllCharacter.Output> getAllCharacter(GetAllCharacter.Input input);
     }
 }

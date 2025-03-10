@@ -13,6 +13,8 @@ import java.sql.Blob;
 @NoArgsConstructor
 @Entity
 @Table(name = "loot")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type")
 public class Loot extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,12 +30,10 @@ public class Loot extends PanacheEntityBase {
     private boolean limited;
 
     @Column(name = "splashart_card")
-    @Lob
-    private Blob splashartCard;
+    private byte[] splashartCard;
 
     @Column(name = "splashart_banner")
-    @Lob
-    private Blob splashartBanner;
+    private byte[] splashartBanner;
 
     @ManyToOne
     private Media media;

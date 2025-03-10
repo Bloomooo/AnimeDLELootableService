@@ -22,6 +22,5 @@ public class Media extends PanacheEntityBase {
     private String name;
 
     @Column(name = "img")
-    @Lob
-    private Blob img;
+    private String img;
 }
