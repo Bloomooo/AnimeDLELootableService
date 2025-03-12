@@ -4,12 +4,10 @@ import org.acme.dto.model.LootDTO;
 
 import java.util.List;
 
-public class GetAllCharacter {
-    public static final String MSG_NAME = "getAllCharacter";
+public class RandomLoadingCharacters {
+    public static final String MSG_NAME = "randomLoadingCharacters";
 
     public static class Input {
-        public int pageNum;
-        public int pageSize;
     }
 
     public static class Output {

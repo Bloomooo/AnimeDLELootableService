@@ -81,8 +81,7 @@ public class CGenericGestionLootableRessource {
     public Uni<Response> getSplashartCard(@PathParam("name") String name) {
         return this.genericGestionUserHandler.getSplashartCard(name)
                 .onItem().transform(card -> {
-                    byte[] imageBytes = card;
-                    return Response.ok(imageBytes)
+                    return Response.ok(card)
                             .type("image/jpeg")
                             .build();
                 });
@@ -93,8 +92,7 @@ public class CGenericGestionLootableRessource {
     public Uni<Response> getSplashartBanner(@PathParam("name") String name){
         return this.genericGestionUserHandler.getSplashartBanner(name)
                 .onItem().transform(card -> {
-                    byte[] imageBytes = card;
-                    return Response.ok(imageBytes)
+                    return Response.ok(card)
                             .type("image/jpeg")
                             .build();
                 });

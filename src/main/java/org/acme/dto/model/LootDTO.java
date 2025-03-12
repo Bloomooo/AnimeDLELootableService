@@ -6,6 +6,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class LootDTO {
+    private Long id;
     private String name;
     private int rarity;
     private Boolean limited;
