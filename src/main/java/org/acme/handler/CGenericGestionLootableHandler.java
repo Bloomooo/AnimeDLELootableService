@@ -3,15 +3,22 @@ package org.acme.handler;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.acme.dto.CDTOGestionLootable;
-import org.acme.dto.http.*;
+import org.acme.dto.http.loot.character.*;
+import org.acme.dto.http.media.CreateMedia;
+import org.acme.dto.http.media.DeleteMedia;
+import org.acme.dto.http.media.EditMedia;
+import org.acme.dto.http.media.GetAllMedia;
 import org.acme.service.CLootService;
+import org.acme.service.CMediaService;
 
 @ApplicationScoped
 public class CGenericGestionLootableHandler implements CDTOGestionLootable.IHandlerDTOGestionUser {
     private final CLootService lootService;
+    private final CMediaService mediaService;
 
-    public CGenericGestionLootableHandler(CLootService lootService) {
+    public CGenericGestionLootableHandler(CLootService lootService, CMediaService mediaService) {
         this.lootService = lootService;
+        this.mediaService = mediaService;
     }
 
     /**
@@ -57,6 +64,42 @@ public class CGenericGestionLootableHandler implements CDTOGestionLootable.IHand
     @Override
     public Uni<RandomLoadingCharacters.Output> randomLoadingCharacters(RandomLoadingCharacters.Input input) {
         return this.lootService.randomLoadingCharacters(input).onItem().transform(out -> out);
+    }
+
+    /**
+     * @param input 
+     * @return
+     */
+    @Override
+    public Uni<GetAllMedia.Output> getAllMedia(GetAllMedia.Input input) {
+        return this.mediaService.getAllMedia(input).onItem().transform(out -> out);
+    }
+
+    /**
+     * @param input 
+     * @return
+     */
+    @Override
+    public Uni<CreateMedia.Output> createMedia(CreateMedia.Input input) {
+        return this.mediaService.createMedia(input).onItem().transform(out -> out);
+    }
+
+    /**
+     * @param input 
+     * @return
+     */
+    @Override
+    public Uni<DeleteMedia.Output> deleteMedia(DeleteMedia.Input input) {
+        return this.mediaService.deleteMedia(input).onItem().transform(out -> out);
+    }
+
+    /**
+     * @param input 
+     * @return
+     */
+    @Override
+    public Uni<EditMedia.Output> editMedia(EditMedia.Input input) {
+        return this.mediaService.editMedia(input).onItem().transform(out -> out);
     }
 
     public Uni<byte[]> getSplashartCard(String name){

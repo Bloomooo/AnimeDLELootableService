@@ -4,9 +4,8 @@ import io.quarkus.hibernate.reactive.panache.common.WithSession;
 import io.quarkus.hibernate.reactive.panache.common.WithTransaction;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
-import org.acme.dto.http.*;
+import org.acme.dto.http.loot.character.*;
 import org.acme.mapper.ILootMapper;
-import org.acme.model.Character;
 import org.acme.model.Loot;
 import org.acme.repository.CCharacterRepository;
 import org.acme.repository.CLootRepository;
@@ -85,10 +84,10 @@ public class CLootService {
                 .onItem().transformToUni(loot -> {
                     ILootMapper.INSTANCE.updateCharacterEntity(loot, input.character);
 
-                    if(input.splashartCard != null && !input.splashartCard.equals("")) {
+                    if(input.splashartCard != null && !input.splashartCard.isEmpty()) {
                         loot.setSplashartCard(input.splashartCard.getBytes());
                     }
-                    if(input.splashartBanner != null && !input.splashartBanner.equals("")) {
+                    if(input.splashartBanner != null && !input.splashartBanner.isEmpty()) {
                         loot.setSplashartBanner(input.splashartBanner.getBytes());
                     }
 

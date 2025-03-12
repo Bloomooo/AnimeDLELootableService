@@ -1,11 +1,11 @@
-package org.acme.dto.http;
+package org.acme.dto.http.media;
 
-import org.acme.dto.model.LootDTO;
+import org.acme.dto.model.MediaDTO;
 
 import java.util.List;
 
-public class GetAllCharacter {
-    public static final String MSG_NAME = "getAllCharacter";
+public class GetAllMedia {
+    public static final String MSG_NAME = "getAllMedia";
 
     public static class Input {
         public int pageNum;
@@ -13,7 +13,7 @@ public class GetAllCharacter {
     }
 
     public static class Output {
-        public List<LootDTO> characters;
+        public List<MediaDTO> media;
         public Boolean isSuccess;
         public String message;
     }

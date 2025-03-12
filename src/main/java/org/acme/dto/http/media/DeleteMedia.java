@@ -1,7 +1,7 @@
-package org.acme.dto.http;
+package org.acme.dto.http.media;
 
-public class DeleteCharacter {
-    public static final String MSG_NAME = "deleteCharacter";
+public class DeleteMedia {
+    public static final String MSG_NAME = "deleteMedia";
 
     public static class Input {
         public Long id;

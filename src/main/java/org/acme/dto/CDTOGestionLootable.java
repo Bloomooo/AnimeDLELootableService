@@ -8,7 +8,11 @@ import org.acme.dto.generic.IGenericDTO;
 
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
-import org.acme.dto.http.*;
+import org.acme.dto.http.loot.character.*;
+import org.acme.dto.http.media.CreateMedia;
+import org.acme.dto.http.media.DeleteMedia;
+import org.acme.dto.http.media.EditMedia;
+import org.acme.dto.http.media.GetAllMedia;
 
 @ApplicationScoped
 public class CDTOGestionLootable implements IGenericDTO {
@@ -21,6 +25,10 @@ public class CDTOGestionLootable implements IGenericDTO {
         messageMap.put(EditCharacter.MSG_NAME, new CMessageAPI(EditCharacter.MSG_NAME, EditCharacter.Input.class));
         messageMap.put(CreateCharacter.MSG_NAME, new CMessageAPI(CreateCharacter.MSG_NAME, CreateCharacter.Input.class));
         messageMap.put(RandomLoadingCharacters.MSG_NAME, new CMessageAPI(RandomLoadingCharacters.MSG_NAME, RandomLoadingCharacters.Input.class));
+        messageMap.put(GetAllMedia.MSG_NAME, new CMessageAPI(GetAllMedia.MSG_NAME, GetAllMedia.Input.class));
+        messageMap.put(CreateMedia.MSG_NAME, new CMessageAPI(CreateMedia.MSG_NAME, CreateMedia.Input.class));
+        messageMap.put(DeleteMedia.MSG_NAME, new CMessageAPI(DeleteMedia.MSG_NAME, DeleteMedia.Input.class));
+        messageMap.put(EditMedia.MSG_NAME, new CMessageAPI(EditMedia.MSG_NAME, EditMedia.Input.class));
     }
 
     @Override
@@ -39,5 +47,9 @@ public class CDTOGestionLootable implements IGenericDTO {
         Uni<EditCharacter.Output> editCharacter(EditCharacter.Input input);
         Uni<CreateCharacter.Output> createCharacter(CreateCharacter.Input input);
         Uni<RandomLoadingCharacters.Output> randomLoadingCharacters(RandomLoadingCharacters.Input input);
+        Uni<GetAllMedia.Output> getAllMedia(GetAllMedia.Input input);
+        Uni<CreateMedia.Output> createMedia(CreateMedia.Input input);
+        Uni<DeleteMedia.Output> deleteMedia(DeleteMedia.Input input);
+        Uni<EditMedia.Output> editMedia(EditMedia.Input input);
     }
 }

@@ -3,6 +3,8 @@ package org.acme.mapper;
 import org.acme.dto.model.MediaDTO;
 import org.acme.model.Media;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
@@ -15,4 +17,7 @@ public interface IMediaMapper {
 
     @Named("toEntity")
     Media toEntity(MediaDTO dto);
+
+    @Mapping(target = "id", ignore = true)
+    void updateEntity(@MappingTarget Media existingEntity, MediaDTO dto);
 }
