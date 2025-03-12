@@ -4,6 +4,8 @@ import io.quarkus.hibernate.reactive.panache.common.WithSession;
 import io.quarkus.hibernate.reactive.panache.common.WithTransaction;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
+import org.acme.dto.http.banner.GetBanner;
+import org.acme.mapper.IBannerMapper;
 import org.acme.model.Banner;
 import org.acme.model.Loot;
 import org.acme.repository.CBannerRepository;
@@ -55,6 +57,28 @@ public class CBannerService {
                 })
                 .onFailure().recoverWithItem(e -> {;
                     return false;
+                });
+    }
+
+    @WithSession
+    public Uni<GetBanner.Output> getLatestBanner(GetBanner.Input input) {
+        return this.bannerRepository.findLastestBanner()
+                .onItem().transform(banner -> {
+                    GetBanner.Output output = new GetBanner.Output();
+                    output.isSuccess = Boolean.FALSE;
+                    output.message = "Banner not found";
+                    if(banner != null){
+                        output.banner = IBannerMapper.INSTANCE.toDTO(banner);
+                        output.isSuccess = Boolean.TRUE;
+                        output.message = "Banner found";
+                    }
+                    return output;
+                })
+                .onFailure().recoverWithItem(e -> {
+                    GetBanner.Output output = new GetBanner.Output();
+                    output.isSuccess = Boolean.FALSE;
+                    output.message = e.getMessage();
+                    return output;
                 });
     }
 }

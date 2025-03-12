@@ -8,6 +8,7 @@ import org.acme.dto.generic.IGenericDTO;
 
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
+import org.acme.dto.http.banner.GetBanner;
 import org.acme.dto.http.loot.character.*;
 import org.acme.dto.http.media.CreateMedia;
 import org.acme.dto.http.media.DeleteMedia;
@@ -29,6 +30,7 @@ public class CDTOGestionLootable implements IGenericDTO {
         messageMap.put(CreateMedia.MSG_NAME, new CMessageAPI(CreateMedia.MSG_NAME, CreateMedia.Input.class));
         messageMap.put(DeleteMedia.MSG_NAME, new CMessageAPI(DeleteMedia.MSG_NAME, DeleteMedia.Input.class));
         messageMap.put(EditMedia.MSG_NAME, new CMessageAPI(EditMedia.MSG_NAME, EditMedia.Input.class));
+        messageMap.put(GetBanner.MSG_NAME, new CMessageAPI(GetBanner.MSG_NAME, GetBanner.Input.class));
     }
 
     @Override
@@ -51,5 +53,6 @@ public class CDTOGestionLootable implements IGenericDTO {
         Uni<CreateMedia.Output> createMedia(CreateMedia.Input input);
         Uni<DeleteMedia.Output> deleteMedia(DeleteMedia.Input input);
         Uni<EditMedia.Output> editMedia(EditMedia.Input input);
+        Uni<GetBanner.Output> getBanner(GetBanner.Input input);
     }
 }

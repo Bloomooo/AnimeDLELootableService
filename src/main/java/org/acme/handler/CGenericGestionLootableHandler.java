@@ -3,6 +3,7 @@ package org.acme.handler;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.acme.dto.CDTOGestionLootable;
+import org.acme.dto.http.banner.GetBanner;
 import org.acme.dto.http.loot.character.*;
 import org.acme.dto.http.media.CreateMedia;
 import org.acme.dto.http.media.DeleteMedia;
@@ -103,6 +104,15 @@ public class CGenericGestionLootableHandler implements CDTOGestionLootable.IHand
     @Override
     public Uni<EditMedia.Output> editMedia(EditMedia.Input input) {
         return this.mediaService.editMedia(input).onItem().transform(out -> out);
+    }
+
+    /**
+     * @param input 
+     * @return
+     */
+    @Override
+    public Uni<GetBanner.Output> getBanner(GetBanner.Input input) {
+        return this.bannerService.getLatestBanner(input).onItem().transform(out -> out);
     }
 
     public Uni<byte[]> getSplashartCard(String name){
