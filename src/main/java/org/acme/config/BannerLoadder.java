@@ -3,8 +3,6 @@ package org.acme.config;
 import io.quarkus.scheduler.Scheduled;
 import io.vertx.core.Vertx;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.event.Observes;
-import jakarta.enterprise.event.Startup;
 import org.acme.service.CBannerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,11 +19,7 @@ public class BannerLoadder {
         this.logger = LoggerFactory.getLogger(BannerLoadder.class);
     }
 
-    public void onStartup(@Observes Startup event) {
-        scheduledLoadBanner();
-    }
-
-    @Scheduled(every = "1h")
+    @Scheduled(cron = "0 0 * * * ?")
     public void scheduledLoadBanner() {
         vertx.runOnContext(v -> {
             try {
