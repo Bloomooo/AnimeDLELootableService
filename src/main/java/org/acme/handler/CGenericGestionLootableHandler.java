@@ -8,6 +8,7 @@ import org.acme.dto.http.media.CreateMedia;
 import org.acme.dto.http.media.DeleteMedia;
 import org.acme.dto.http.media.EditMedia;
 import org.acme.dto.http.media.GetAllMedia;
+import org.acme.service.CBannerService;
 import org.acme.service.CLootService;
 import org.acme.service.CMediaService;
 
@@ -15,10 +16,12 @@ import org.acme.service.CMediaService;
 public class CGenericGestionLootableHandler implements CDTOGestionLootable.IHandlerDTOGestionUser {
     private final CLootService lootService;
     private final CMediaService mediaService;
+    private final CBannerService bannerService;
 
-    public CGenericGestionLootableHandler(CLootService lootService, CMediaService mediaService) {
+    public CGenericGestionLootableHandler(CLootService lootService, CMediaService mediaService, CBannerService bannerService) {
         this.lootService = lootService;
         this.mediaService = mediaService;
+        this.bannerService = bannerService;
     }
 
     /**

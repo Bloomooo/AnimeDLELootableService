@@ -27,7 +27,7 @@ public class Loot extends PanacheEntityBase {
     private int rarity;
 
     @Column(name = "limited")
-    private boolean limited;
+    private Boolean limited;
 
     @Column(name = "splashart_card")
     private byte[] splashartCard;
